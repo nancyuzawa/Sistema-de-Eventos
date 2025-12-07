@@ -1,0 +1,10 @@
+<h2>Remover Participante</h2>
+
+<p>Tem certeza que deseja remover <strong>{{ participante.nome }}</strong> do evento?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Sim, remover</button>
+</form>
+
+<a href="{% url 'detalhes_evento' participante.evento.id %}">Cancelar</a>

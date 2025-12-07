@@ -1,0 +1,25 @@
+<h2>Adicionar Participante ao Evento "{{ evento.nome }}"</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Nome:</label>
+    <input type="text" name="nome" required>
+
+    <br><br>
+
+    <label>E-mail:</label>
+    <input type="email" name="email" required>
+
+    <br><br>
+
+    <label>Telefone:</label>
+    <input type="text" name="telefone">
+
+    <br><br>
+
+    <button type="submit">Salvar participante</button>
+</form>
+
+<br>
+<a href="{% url 'evento_detalhe' evento.id %}">Voltar</a>

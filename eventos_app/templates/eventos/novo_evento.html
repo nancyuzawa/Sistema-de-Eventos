@@ -1,0 +1,29 @@
+<h1>Novo Evento</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>
+        <label>Nome:</label><br>
+        <input type="text" name="nome" value="{{ form.nome.value|default:'' }}">
+    </p>
+
+    <p>
+        <label>Descrição:</label><br>
+        <textarea name="descricao">{{ form.descricao.value|default:'' }}</textarea>
+    </p>
+
+    <p>
+        <label>Data de início:</label><br>
+        <input type="datetime-local" name="data_inicio" value="{{ form.data_inicio.value|default:'' }}">
+    </p>
+
+    <p>
+        <label>Data de fim:</label><br>
+        <input type="datetime-local" name="data_fim" value="{{ form.data_fim.value|default:'' }}">
+    </p>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a href="{% url 'lista_eventos' %}">Voltar</a>
