@@ -7,6 +7,8 @@ from .models import Evento, Participacao, Participante
 from django.contrib import messages
 from .forms import EventoForm, ParticipanteForm
 
+from rest_framework import viewsets
+from .serializers import EventoSerializer
 
 # LISTAGEM
 @login_required
@@ -170,3 +172,8 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+# cria automaticamente GET (Listar), POST (Criar), PUT (Atualizar), DELETE (Remover)
+class EventoViewSet(viewsets.ModelViewSet):
+    queryset = Evento.objects.all()
+    serializer_class = EventoSerializer

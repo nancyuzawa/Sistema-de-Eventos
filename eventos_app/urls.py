@@ -1,7 +1,17 @@
+<<<<<<< Updated upstream
 from django.shortcuts import render
 from django.urls import path
 from . import views
 from .views import remover_participante, editar_participante
+=======
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
+from .views import EventoViewSet, remover_participante, editar_participante
+
+router = DefaultRouter()
+router.register(r'eventos', EventoViewSet)
+>>>>>>> Stashed changes
 
 urlpatterns = [
     path("", views.lista_eventos, name="lista_eventos"),
@@ -19,5 +29,10 @@ urlpatterns = [
 
     path("login/", views.login_view, name="login"),
     path("logout/", views.logout_view, name="logout"),
+<<<<<<< Updated upstream
+=======
+
+    path('api/', include(router.urls)),
+>>>>>>> Stashed changes
 ]
 
