@@ -37,15 +37,12 @@ class _ListaAtividadesScreenState extends State<ListaAtividadesScreen> {
     }
   }
 
-  // Agora aceita um parâmetro opcional para edição
   void _showForm({Atividade? atividade}) {
     final tituloController = TextEditingController(text: atividade?.titulo ?? '');
     final descController = TextEditingController(text: atividade?.descricao ?? '');
     
-    // Se for edição, tenta manter o evento original selecionado
     int? eventoSelecionado = atividade?.eventoId;
 
-    // Se o evento original não estiver na lista (foi deletado?), limpa a seleção
     if (eventoSelecionado != null && !eventosDisponiveis.any((e) => e.id == eventoSelecionado)) {
       eventoSelecionado = null;
     }
@@ -82,7 +79,7 @@ class _ListaAtividadesScreenState extends State<ListaAtividadesScreen> {
                   onPressed: () async {
                     if (eventoSelecionado != null && tituloController.text.isNotEmpty) {
                       final novaAtv = Atividade(
-                        id: atividade?.id, // Mantém ID se for edição
+                        id: atividade?.id, 
                         eventoId: eventoSelecionado!,
                         titulo: tituloController.text,
                         descricao: descController.text,
@@ -116,7 +113,7 @@ class _ListaAtividadesScreenState extends State<ListaAtividadesScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Atividades (Programação)')),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showForm(), // Chama sem parâmetros para criar
+        onPressed: () => _showForm(),
         child: const Icon(Icons.add_task),
       ),
       body: FutureBuilder<List<Atividade>>(
@@ -144,12 +141,12 @@ class _ListaAtividadesScreenState extends State<ListaAtividadesScreen> {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Botão Editar (Lápis)
+                        // Botão Editar
                         IconButton(
                           icon: const Icon(Icons.edit, color: Colors.blue),
-                          onPressed: () => _showForm(atividade: atv), // Passa a atividade para editar
+                          onPressed: () => _showForm(atividade: atv), 
                         ),
-                        // Botão Excluir (Lixeira)
+                        // Botão Excluir
                         IconButton(
                           icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () async {

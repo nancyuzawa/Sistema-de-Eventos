@@ -24,7 +24,6 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        # cria o usuário criptografando a senha
         user = User.objects.create_user(**validated_data)
         return user
     

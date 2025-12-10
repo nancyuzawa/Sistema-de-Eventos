@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               leading: const Icon(Icons.people),
               title: const Text('Participantes'),
               onTap: () {
-                Navigator.pop(context); // Fecha o menu
+                Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               leading: const Icon(Icons.event),
               title: const Text('Eventos'),
-              onTap: () => Navigator.pop(context), // Já estamos na Home
+              onTap: () => Navigator.pop(context), 
             ),
             ListTile(
               leading: const Icon(Icons.list_alt),

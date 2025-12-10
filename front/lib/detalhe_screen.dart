@@ -36,17 +36,14 @@ class _DetalheScreenState extends State<DetalheScreen> {
   // Busca inscrições e filtra as que são deste evento
   void _carregarInscricoes() async {
     try {
-      // Carrega TUDO (Inscrições e Pessoas) para poder cruzar os dados
       final listaInscricoes = await api.getInscricoes();
       final listaPessoas = await api.getParticipantes();
 
       // Filtra apenas inscrições deste evento
       final inscricoesDoEvento = listaInscricoes.where((i) => i['evento'] == widget.eventoId).toList();
 
-      // Monta uma lista bonitinha com o nome da pessoa junto
       List<dynamic> listaFinal = [];
       for (var inscricao in inscricoesDoEvento) {
-        // Acha quem é o dono do ID 'participante'
         final pessoa = listaPessoas.firstWhere(
             (p) => p.id == inscricao['participante'],
             orElse: () => Participante(nome: 'Desconhecido', email: '', telefone: '')
@@ -61,7 +58,7 @@ class _DetalheScreenState extends State<DetalheScreen> {
 
       setState(() {
         inscricoes = listaFinal;
-        todosParticipantes = listaPessoas; // Guarda para usar no Dropdown depois
+        todosParticipantes = listaPessoas;
       });
     } catch (e) {
       print("Erro ao carregar inscrições: $e");
@@ -74,7 +71,7 @@ class _DetalheScreenState extends State<DetalheScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return StatefulBuilder( // Necessário para atualizar o Dropdown dentro do Dialog
+        return StatefulBuilder( 
           builder: (context, setStateDialog) {
             return AlertDialog(
               title: const Text("Adicionar Participante"),
@@ -99,7 +96,7 @@ class _DetalheScreenState extends State<DetalheScreen> {
                     if (participanteSelecionado != null) {
                       await api.createInscricao(widget.eventoId, participanteSelecionado!);
                       Navigator.pop(context);
-                      _carregarInscricoes(); // Recarrega a lista
+                      _carregarInscricoes(); 
                     }
                   },
                   child: const Text("Confirmar"),
@@ -127,13 +124,10 @@ class _DetalheScreenState extends State<DetalheScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // --- CABEÇALHO DO EVENTO ---
                 Text(evento.nome, style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.blue)),
                 const SizedBox(height: 10),
                 Text(evento.descricao ?? "Sem descrição", style: const TextStyle(fontSize: 16)),
                 const Divider(height: 30),
-                
-                // --- BOTÕES DE AÇÃO DO EVENTO ---
                 Row(
                   children: [
                     Expanded(
@@ -162,7 +156,7 @@ class _DetalheScreenState extends State<DetalheScreen> {
                         child: Text("Ninguém inscrito ainda."),
                       )
                     : ListView.builder(
-                        shrinkWrap: true, // Importante para lista dentro de ScrollView
+                        shrinkWrap: true, 
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: inscricoes.length,
                         itemBuilder: (context, index) {

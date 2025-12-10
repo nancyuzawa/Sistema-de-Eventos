@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
 from django.contrib import admin
 from .models import Evento
 from django.contrib.auth.models import User
@@ -9,8 +8,3 @@ from django.contrib.auth.models import User
 class EventoAdmin(admin.ModelAdmin):
     list_display = ("nome", "data_inicio", "data_fim")
     search_fields = ("nome", "organizador__username")
-
-# @admin.register(Atividade)
-# class AtividadeAdmin(admin.ModelAdmin):
-#     list_display = ("titulo", "evento", "finalizada")
-#     list_filter = ("finalizada",)

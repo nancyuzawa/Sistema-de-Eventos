@@ -80,7 +80,7 @@ class _ListaParticipantesScreenState extends State<ListaParticipantesScreen> {
                 }
 
                 if (mounted) {
-                  Navigator.pop(context); // Fecha janela
+                  Navigator.pop(context); 
                   _refreshList();
                 }
               } catch (e) {
