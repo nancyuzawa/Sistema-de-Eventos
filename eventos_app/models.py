@@ -30,3 +30,12 @@ class Participacao(models.Model):
 
     class Meta:
         unique_together = ("participante", "evento")
+
+class Atividade(models.Model):
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, related_name="atividades")
+    titulo = models.CharField(max_length=150)
+    descricao = models.TextField(blank=True)
+    finalizada = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.titulo

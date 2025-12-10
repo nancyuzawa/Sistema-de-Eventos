@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/detalhe_screen.dart';
+import 'package:front/lista_atividades.dart';
+import 'package:front/lista_participantes.dart';
 import 'package:front/login_screen.dart';
 import 'api_service.dart';
 import 'evento.dart';
@@ -54,6 +56,53 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.deepPurple),
+              child: Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.people),
+              title: const Text('Participantes'),
+              onTap: () {
+                Navigator.pop(context); // Fecha o menu
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ListaParticipantesScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.event),
+              title: const Text('Eventos'),
+              onTap: () => Navigator.pop(context), // Já estamos na Home
+            ),
+            ListTile(
+              leading: const Icon(Icons.list_alt),
+              title: const Text('Atividades'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ListaAtividadesScreen(),
+                  ),
+                );
+              },
+            ),
+            
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () async {
@@ -97,9 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             evento.descricao!.isNotEmpty)
                           Text("Descrição: ${evento.descricao!}"),
 
-                        const SizedBox(
-                          height: 5,
-                        ), 
+                        const SizedBox(height: 5),
                         Row(
                           children: [
                             const Icon(
@@ -121,8 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    isThreeLine:
-                        true, 
+                    isThreeLine: true,
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

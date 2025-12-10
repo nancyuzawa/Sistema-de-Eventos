@@ -1,10 +1,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import EventoViewSet, UserCreate
+from .views import AtividadeViewSet, EventoViewSet, ParticipacaoViewSet, ParticipanteViewSet, UserCreate
 from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter()
 router.register(r'eventos', EventoViewSet)
+router.register(r'participantes', ParticipanteViewSet)
+router.register(r'inscricoes', ParticipacaoViewSet)
+router.register(r'atividades', AtividadeViewSet)
 
 urlpatterns = [
     # Rotas principais da API
