@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-00@=ih89g!+wx9^bt2k!+@4(cmh3)s05oyjne@*#=ikr*6pgx%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['*']
+# para ser mais seguro:
+ALLOWED_HOSTS = ['10.0.2.2', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -40,16 +42,14 @@ INSTALLED_APPS = [
     'eventos_app', # Meus aplicativos
     "crispy_forms", # Aplicativos de terceiros
     "rest_framework",
-    "rest_framework.authtoken",  # opcional se quiser token
+    "rest_framework.authtoken", 
     "corsheaders",
 ]
 
 REST_FRAMEWORK = {
-    # Por enquanto permissivo para facilitar desenvolvimento.
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
-    # Para produção, troque para IsAuthenticated e use JWT/Token.
 }
 
 

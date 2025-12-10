@@ -3,10 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-
 class Evento(models.Model):
     nome = models.CharField(max_length=200)
-    descricao = models.TextField()
+    descricao = models.TextField(blank=True)
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField()
     organizador = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -14,8 +13,7 @@ class Evento(models.Model):
     def __str__(self):
         return self.nome
 
-
-#O organizador cadaastra o participante
+#O organizador cadastra o participante
 class Participante(models.Model):
     nome = models.CharField(max_length=200)
     email = models.EmailField()
@@ -32,17 +30,3 @@ class Participacao(models.Model):
 
     class Meta:
         unique_together = ("participante", "evento")
-
-
-
-
-
-
-class Atividade(models.Model):
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, related_name="atividades")
-    titulo = models.CharField(max_length=150)
-    descricao = models.TextField(blank=True)
-    finalizada = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.titulo

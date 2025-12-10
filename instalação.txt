@@ -1,18 +1,38 @@
+## Verifica a versão do Python
 py --version ou python --version
 
+## Cria um ambiente virtual
 python -m venv venv ou py -m venv venv
 
-
+## Ativa o ambiente virtual
 venv\Scripts\activate
 
+## Instala o Django
 pip install django
 
+## Instala as dependências adicionais
 pip install django==5.1 psycopg2-binary django-crispy-forms
+pip install -r requirements.txt
 
+## Cria/atualiza as dependências que estão dentro do arquivo .txt
 pip freeze > requirements.txt
 
-django-admin startproject gestao_eventos .
+## sincroniza seus models.py com o banco de dados.
+python manage.py migrate
 
-pip install djangorestframework
- 
-pip install django-cors-headers
+## Roda o servidor Django
+python manage.py runserver
+
+
+## Ver a versão do Flutter
+flutter --version
+
+## Entrar na pasta do projeto
+cd front
+
+## Baixar as dependências
+flutter pub get
+
+## Rodar o projeto direto no chrome
+flutter run -d chrome
+
